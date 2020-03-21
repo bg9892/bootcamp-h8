@@ -18,4 +18,14 @@ app.post("/api/notes", function (req, res) {
     res.send(db);
 })
 
+app.delete("/api/notes/:id", function (req, res) {
+    var id = req.params.id;
+    for (var i = 0; i < db.length; i++) {
+        if (id === db[i].id) {
+            db.splice(i);
+        }
+    };
+    res.json(db);
+});
+
 module.exports = app;
