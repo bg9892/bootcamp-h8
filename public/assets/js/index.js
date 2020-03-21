@@ -3,7 +3,7 @@ var $noteText = $(".note-textarea");
 var $saveNoteBtn = $(".save-note");
 var $newNoteBtn = $(".new-note");
 var $noteList = $(".list-container .list-group");
-
+var id = 0;
 // activeNote is used to keep track of the note in the textarea
 var activeNote = {};
 
@@ -35,7 +35,7 @@ var deleteNote = function(id) {
 // If there is an activeNote, display it, otherwise render empty inputs
 var renderActiveNote = function() {
   $saveNoteBtn.hide();
-
+console.log(activeNote);
   if (activeNote.id) {
     $noteTitle.attr("readonly", true);
     $noteText.attr("readonly", true);
@@ -53,9 +53,10 @@ var renderActiveNote = function() {
 var handleNoteSave = function() {
   var newNote = {
     title: $noteTitle.val(),
-    text: $noteText.val()
+    text: $noteText.val(),
+    id: id
   };
-
+  id++;
   saveNote(newNote).then(function(data) {
     getAndRenderNotes();
     renderActiveNote();
